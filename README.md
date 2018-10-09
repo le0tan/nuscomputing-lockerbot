@@ -4,10 +4,10 @@ A Telegram Bot for NUS SoC locker registration and management.
 ## Dependency
 This repo uses [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api) created by [yagop](https://github.com/yagop).
 Please run `npm install` to resolve dependencies before using this repo.
-Also, credentials like our Telegram bot token are stored in `credntial.js` in a form like
+Also, credentials like our Telegram bot token are stored in `.env` under root directory in form
 ```javascript
-module.exports = Object.freeze({
-    token: 'YOUR_TOKEN_HERE'
-});
+BOT_TOKEN = ...
+IVLE_API_KEY = ...
+IVLE_URL_CALLBACK = ...
 ```
-In consideration of privacy, we added the file to `.gitignore` so please create your own `credntial.js`.
+In consideration of privacy, add the file to `.gitignore`.
