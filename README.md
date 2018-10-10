@@ -11,3 +11,17 @@ IVLE_API_KEY = ...
 IVLE_URL_CALLBACK = ...
 ```
 In consideration of privacy, add the file to `.gitignore`.
+
+## Dev Note
+
+### To set callback url to localhost
+
+(Assume you want to receive `POST` message via `localhost:8081`)
+
+```bash
+npm install http-echo-server -g
+export PORT=8081
+http-echo-server
+```
+
+This package will return whatever message it receives...
