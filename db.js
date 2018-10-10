@@ -13,10 +13,15 @@ con.connect(function(err) {
   console.log("Connected!");
 });
 
-module.exports.createDatabase = function (){
-  var sql = "CREATE DATABASE lockerbot_db";
-  con.query(sql, function (err, result) {
+function queryWithLog(command){
+  console.log("Command: " + command);
+  con.query(command, function (err, result) {
     if (err) throw err;
     console.log("Result: " + result);
   });
+}
+
+module.exports.initialize = function (){
+  queryWithLog("USE lockerbot_db");
+  // queryWithLog("")
 }
