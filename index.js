@@ -1,5 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
-const database = require('./db');
+// const database = require('./db');
 require("dotenv").config();
 const {BOT_TOKEN, IVLE_API_KEY, IVLE_URL_CALLBACK} = process.env;
 
@@ -8,6 +8,8 @@ const bot = new TelegramBot(BOT_TOKEN, {polling: true});
 bot.on('message', (msg) => {
   const command = msg.text.split(' ')[0];
   const args = msg.text.substr(command.length + 1);
+
+  console.log(msg.chat.id);
 
   switch(command){
     case '/start':{
@@ -33,5 +35,4 @@ bot.on('message', (msg) => {
       break;
     }
   }
-
 });
