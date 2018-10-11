@@ -45,6 +45,7 @@ bot.on('message', (msg) => {
     }
     case '/token':{
       var token = args;
+      //get the ivle id
       axios.get('https://ivle.nus.edu.sg/api/Lapi.svc/'+ 'UserID_Get' + '?APIKey='+ IVLE_API_KEY + '&Token=' + token)
         .then(resp => {
           var ivle_id = resp.data;
@@ -52,13 +53,15 @@ bot.on('message', (msg) => {
           function(err, res){
             if(err) throw err;
             else {
+              //if ivle_id already exists in the db, abort the registration
               if(JSON.parse(JSON.stringify(res[0]))['count (*)'] != 0){
                 bot.sendMessage(msg.chat.id, 'Sorry but your IVLE ID has been registered before.');
               } else {
+                //insert new user to the db
                 axios.get('https://ivle.nus.edu.sg/api/Lapi.svc/'+ 'UserName_Get' + '?APIKey='+ IVLE_API_KEY + '&Token=' + token)
                   .then(resp => {
                     var ivle_name = resp.data;
-                    database.con.query(`insert into users(chat_id, ivle_token, ivle_id, ivle_name) values (${msg.chat.id}, "${token}", "${ivle_id}", "${ivle_name}");`,
+                    database.con.query(`insert into users(chat_id, ivle_id, ivle_name) values (${msg.chat.id}, "${ivle_id}", "${ivle_name}");`,
                     function(err, res){
                       if(err) throw err;
                       else {
@@ -78,6 +81,10 @@ bot.on('message', (msg) => {
           console.log(err);
         });
 
+      break;
+    }
+    case '/serve':{
+      bot.sendMessage(msg.chat.id, 'Sorry but the developer has not implemented this part');
       break;
     }
     default:{
