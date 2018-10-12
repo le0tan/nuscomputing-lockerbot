@@ -128,7 +128,7 @@ bot.on('message', (msg) => {
         });
       break;
     }
-    case 'test':{
+    case '/test':{
       bot.sendMessage(
         msg.chat.id, `Hi ${msg.chat.first_name}! Let's get you set up!`,
         {

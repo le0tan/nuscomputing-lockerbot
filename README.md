@@ -47,6 +47,19 @@ In consideration of privacy, add the file to `.gitignore`.
 | ivle_id   | varchar(10) | no       |         | null    |                |
 | ivle_name | varchar(63) | yes      |         | null    |                |
 
+## Deployment
+
+```javascript
+BOT_TOKEN = [omitted]
+IVLE_API_KEY = http://[Your IP address]
+IVLE_URL_CALLBACK = [omitted]
+DB_HOST = [omitted]
+DB_USER = [omitted]
+DB_PASSWORD = [omitted]
+TOKEN_SERVER_PORT = 80
+```
+
+and remember to allow inbound data through `:80`
 
 ## Dev Note
 
