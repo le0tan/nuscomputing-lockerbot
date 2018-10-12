@@ -128,6 +128,20 @@ bot.on('message', (msg) => {
         });
       break;
     }
+    case 'test':{
+      bot.sendMessage(
+        msg.chat.id, `Hi ${msg.chat.first_name}! Let's get you set up!`,
+        {
+          parse_mode: 'Markdown',
+          reply_markup: {
+            inline_keyboard: [
+              [{ text: 'Get IVLE Token', url: `https://ivle.nus.edu.sg/api/login/?apikey=${IVLE_API_KEY}&url=${IVLE_URL_CALLBACK}` }],
+            ],
+          },
+        },
+      );
+      break;
+    }
     default:{
       bot.sendMessage(msg.chat.id, "Wrong command!");
       break;
