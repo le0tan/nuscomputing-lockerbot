@@ -110,6 +110,24 @@ bot.on('message', (msg) => {
       });
       break;
     }
+    case '/show':{
+      database.con.query(`select user_id from users where chat_id = ${msg.chat.id};`,
+        function(err, res){
+          if(err) console.log(err);
+          else {
+            const db_user_id = JSON.parse(JSON.stringify(res[0]))['user_id'];
+            database.con.query(`select location, description, label from lockers where owner_id = ${db_user_id};`,
+              function(err, res){
+                if(err) console.log(err);
+                else {
+                  const json_obj = JSON.stringify(res);
+                  bot.sendMessage(msg.chat.id, json_obj);
+                }
+              });
+          }
+        });
+      break;
+    }
     default:{
       bot.sendMessage(msg.chat.id, "Wrong command!");
       break;
