@@ -141,7 +141,6 @@ bot.on('callback_query', (callbackQuery) => {
   {
     const action = callbackQuery.data;
     const msg = callbackQuery.message;
-    console.log(action);
     const switcher = action.split(' ');
     switch(switcher[0]){
       case 'Confirmed':{
@@ -175,7 +174,6 @@ bot.on('callback_query', (callbackQuery) => {
                               where location = '${loc}'
                                     and owner_id is null
                               limit 1;`;
-              // console.log(syntax);
               database.con.query(syntax,
                 function(err, res){
                   if(err) console.log(err);
@@ -189,7 +187,6 @@ bot.on('callback_query', (callbackQuery) => {
                       });
                   }
                 });
-              console.log(db_user_id);
             }
           });
         break;
