@@ -1,16 +1,52 @@
 # nuscomputing-lockerbot
+
 A Telegram Bot for NUS SoC locker registration and management.
 
 ## Dependency
-This repo uses [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api) created by [yagop](https://github.com/yagop).
-Please run `npm install` to resolve dependencies before using this repo.
-Also, credentials like our Telegram bot token are stored in `.env` under root directory in form
+
+node-telegram-bot-api@npm ~0.30.0
+axios@npm ~0.18.0
+dotenv@npm ~6.1.0
+mysql@npm ~2.16.0
+
+
+## Environment constants
+
+Credentials are stored in `.env` under root directory in form
 ```javascript
-BOT_TOKEN = ...
-IVLE_API_KEY = ...
-IVLE_URL_CALLBACK = ...
+BOT_TOKEN = [omitted]
+IVLE_API_KEY = [omitted]
+IVLE_URL_CALLBACK = [omitted]
+DB_HOST = [omitted]
+DB_USER = [omitted]
+DB_PASSWORD = [omitted]
+TOKEN_SERVER_PORT = [omitted]
 ```
 In consideration of privacy, add the file to `.gitignore`.
+
+## Database configuration
+
+### lockers
+
+| Field        | Type         | Nullable | Key     | Default | Extra          |
+|--------------|--------------|----------|---------|---------|----------------|
+| id           | int(11)      | no       | PRIMARY | null    | auto_increment |
+| owner_id     | int(11)      | yes      | FOREIGN | null    |                |
+| location     | varchar(255) | no       |         | null    |                |
+| description  | varchar(255) | yes      |         | null    |                |
+| label        | int(11)      | no       |         | null    |                |
+| request_date | date         | yes      |         | null    |                |
+| expire_date  | date         | yes      |         | null    |                |
+
+### users
+
+| Field     | Type        | Nullable | Key     | Default | Extra          |
+|-----------|-------------|----------|---------|---------|----------------|
+| user_id   | int(11)     | no       | PRIMARY | null    | auto_increment |
+| chat_id   | int(11)     | no       |         | null    |                |
+| ivle_id   | varchar(10) | no       |         | null    |                |
+| ivle_name | varchar(63) | yes      |         | null    |                |
+
 
 ## Dev Note
 
