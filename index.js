@@ -194,7 +194,7 @@ bot.on('callback_query', (callbackQuery) => {
           });
         break;
       }
-      case 'Not confirmed':{
+      case 'NotConfirmed':{
         //not confirmed, prompt the user to request again
         bot.sendMessage(msg.chat.id, `OK. You may send /request again to request again!`);
         break;
@@ -202,7 +202,7 @@ bot.on('callback_query', (callbackQuery) => {
       default:{
         const inlineMessage = [[
           {text: 'Yes', callback_data: 'Confirmed ' + action},  //we need to send location back!
-          {text: 'No', callback_data: 'Not confirmed'}
+          {text: 'No', callback_data: 'NotConfirmed'}
         ]];
         const opts = {
           chat_id: msg.chat.id,
