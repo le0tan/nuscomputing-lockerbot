@@ -12,20 +12,32 @@ http.createServer(function (req, res) {
     var ans = '/token ' + q.token;
     console.log(ans);
 
-    var body = `
-                Please copy the following line to Telegram Bot conversation <br/>
-                <button class="btn" data-clipboard-target="#token"><img src="https://clipboardjs.com/assets/images/clippy.svg" alt="Copy to clipboard" width="30"></button>
-                <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-                <script>
-                    var clipboard = new ClipboardJS('.btn');
-                    clipboard.on('success', function(e) {
-                        console.log(e);
-                    });
-                    clipboard.on('error', function(e) {
-                        console.log(e);
-                    });
-                </script>
-                <input type="text" value="${ans}" id="token" width="2000" height="2000">
+    var body = `<head>
+                    <title>SoC LockerBot</title>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                </head>
+                <body>
+                    <span>
+                        <p width="100%">Please copy the following line to Telegram Bot conversation</p>
+                    </span>
+                    
+                    <button type="button" class="btn btn-default" data-clipboard-target="#token"><img src="https://clipboardjs.com/assets/images/clippy.svg" alt="Copy to clipboard" width="10%"></button>
+                    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+                    <script>
+                        var clipboard = new ClipboardJS('.btn');
+                        clipboard.on('success', function(e) {
+                            console.log(e);
+                        });
+                        clipboard.on('error', function(e) {
+                            console.log(e);
+                        });
+                    </script>
+                    <input type="text" class="form-control" value="${ans}" id="token">
+                </body>
                 `;
     res.end(body);
 }).listen(TOKEN_SERVER_PORT); //the server object listens on port 8080
