@@ -10,8 +10,6 @@ http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     var q = url.parse(req.url, true).query;
     var ans = '/token ' + q.token;
-    console.log(ans);
-
     var body = `<head>
                     <title>SoC LockerBot</title>
                     <meta charset="utf-8">
