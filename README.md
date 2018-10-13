@@ -4,11 +4,17 @@ A Telegram Bot for NUS SoC locker registration and management.
 
 ## Dependency
 
-node-telegram-bot-api@npm ~0.30.0
-axios@npm ~0.18.0
-dotenv@npm ~6.1.0
-mysql@npm ~2.16.0
+mysql-server@~8.0.12
 
+node.js@~10.11.0
+
+node-telegram-bot-api@npm ~0.30.0
+
+axios@npm ~0.18.0
+
+dotenv@npm ~6.1.0
+
+mysql@npm ~2.16.0
 
 ## Environment constants
 

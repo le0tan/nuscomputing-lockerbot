@@ -3,6 +3,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const database = require('./db');
 const axios = require('axios');
 require("dotenv").config();
+require("./token_server");
 
 //create global constants
 const {BOT_TOKEN, IVLE_API_KEY, IVLE_URL_CALLBACK} = process.env;
