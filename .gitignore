@@ -2,3 +2,5 @@
 ivle_test.js
 ivle.js
 db.sql
+/.vscode/*
+/assets/*
