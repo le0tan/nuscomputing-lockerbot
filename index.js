@@ -66,7 +66,8 @@ bot.on('message', (msg) => {
                     function(err, res){
                       if(err) throw err;
                       else {
-                        console.log(`Successfully added user ${ivle_id}!`)
+                        bot.sendMessage(msg.chat.id, `Welcome to LockerBot, ${ivle_name}!`);
+                        console.log(`Successfully added user ${ivle_id}: ${ivle_name}!`)
                       }
                     });
                   })

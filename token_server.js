@@ -38,7 +38,7 @@ http.createServer(function (req, res) {
                 </body>
                 `;
     res.end(body);
-}).listen(TOKEN_SERVER_PORT); //the server object listens on port 8080
+}).listen(TOKEN_SERVER_PORT ,'0.0.0.0');
 
 //unused file server
 // http.createServer(function(req, res){
