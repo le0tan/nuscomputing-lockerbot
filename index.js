@@ -95,18 +95,22 @@ bot.on('message', (msg) => {
           //stored in Array 'mapped'
           const json_res = JSON.parse(JSON.stringify(res));
           const len = json_res.length;
-          const mapped =  new Array;
-          for(let i = 0; i < len; i++){
-            const content = json_res[i].location;
-            mapped.push([{ text : content, callback_data: content }]);
-          }
-          //create inline keyboard to show locations available
-          {
-            let options = {
-              reply_markup: `{"inline_keyboard": ${JSON.stringify(mapped)}}`
-            };
-            // console.log(options);
-            bot.sendMessage(msg.chat.id, "Here are the locations available", options);
+          if(len <= 0){
+            bot.sendMessage(msg.chat.id, "Sorry, there is no lockers available. Please check later.");
+          } else {
+            const mapped =  new Array;
+            for(let i = 0; i < len; i++){
+              const content = json_res[i].location;
+              mapped.push([{ text : content, callback_data: content }]);
+            }
+            //create inline keyboard to show locations available
+            {
+              let options = {
+                reply_markup: `{"inline_keyboard": ${JSON.stringify(mapped)}}`
+              };
+              // console.log(options);
+              bot.sendMessage(msg.chat.id, "Here are the locations available", options);
+            }  
           }
         }
       });
