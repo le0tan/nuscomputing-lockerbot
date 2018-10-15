@@ -86,34 +86,47 @@ bot.on('message', (msg) => {
       break;
     }
     case '/request':{
-      //select only the locations with lockers without an owner
-      database.con.query(`select distinct location from lockers where owner_id is null;`,
+      database.con.query('select count (*) from users where chat_id = ' + msg.chat.id + ';',
       function(err, res){
         if(err) throw err;
         else {
-          //query locations of the lockers
-          //stored in Array 'mapped'
-          const json_res = JSON.parse(JSON.stringify(res));
-          const len = json_res.length;
-          if(len <= 0){
-            bot.sendMessage(msg.chat.id, "Sorry, there is no lockers available. Please check later.");
+          //check the registration first
+          if(JSON.parse(JSON.stringify(res[0]))['count (*)'] == 0){
+            bot.sendMessage(msg.chat.id, 'Please send /start to register first!');
           } else {
-            const mapped =  new Array;
-            for(let i = 0; i < len; i++){
-              const content = json_res[i].location;
-              mapped.push([{ text : content, callback_data: content }]);
-            }
-            //create inline keyboard to show locations available
-            {
-              let options = {
-                reply_markup: `{"inline_keyboard": ${JSON.stringify(mapped)}}`
-              };
-              // console.log(options);
-              bot.sendMessage(msg.chat.id, "Here are the locations available", options);
-            }  
+            //otherwise guide the user through the request
+            //select only the locations with lockers without an owner
+            database.con.query(`select distinct location from lockers where owner_id is null;`,
+            function(err, res){
+              if(err) throw err;
+              else {
+                //query locations of the lockers
+                //stored in Array 'mapped'
+                const json_res = JSON.parse(JSON.stringify(res));
+                const len = json_res.length;
+                if(len <= 0){
+                  bot.sendMessage(msg.chat.id, "Sorry, there is no lockers available. Please check later.");
+                } else {
+                  const mapped =  new Array;
+                  for(let i = 0; i < len; i++){
+                    const content = json_res[i].location;
+                    mapped.push([{ text : content, callback_data: content }]);
+                  }
+                  //create inline keyboard to show locations available
+                  {
+                    let options = {
+                      reply_markup: `{"inline_keyboard": ${JSON.stringify(mapped)}}`
+                    };
+                    // console.log(options);
+                    bot.sendMessage(msg.chat.id, "Here are the locations available", options);
+                  }  
+                }
+              }
+            });
           }
         }
-      });
+    });
+
       break;
     }
     case '/show':{
