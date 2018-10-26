@@ -62,6 +62,7 @@ IVLE_URL_CALLBACK = [omitted]
 DB_HOST = [omitted]
 DB_USER = [omitted]
 DB_PASSWORD = [omitted]
+DB_NAME = [omitted]
 TOKEN_SERVER_PORT = 80
 ```
 
