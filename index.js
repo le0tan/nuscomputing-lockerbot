@@ -134,15 +134,19 @@ bot.on('message', (msg) => {
         function(err, res){
           if(err) console.log(err);
           else {
-            const db_user_id = JSON.parse(JSON.stringify(res[0]))['user_id'];
-            database.con.query(`select location, description, label from lockers where owner_id = ${db_user_id};`,
-              function(err, res){
-                if(err) console.log(err);
-                else {
-                  const json_obj = JSON.stringify(res);
-                  bot.sendMessage(msg.chat.id, json_obj);
-                }
-              });
+            if(res.length <= 0){
+              bot.sendMessage(msg.chat.id, 'Please send /start to register first!');
+            } else {
+              const db_user_id = JSON.parse(JSON.stringify(res[0]))['user_id'];
+              database.con.query(`select location, description, label from lockers where owner_id = ${db_user_id};`,
+                function(err, res){
+                  if(err) console.log(err);
+                  else {
+                    const json_obj = JSON.stringify(res);
+                    bot.sendMessage(msg.chat.id, json_obj);
+                  }
+                });
+            }
           }
         });
       break;
